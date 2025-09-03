@@ -4,7 +4,6 @@
 # Purpose: Run menu program that stores data in two separate files. One file is for participant data and the other is for survey data.
 
 # Import necessary modules
-from ast import Return
 import os
 from datetime import datetime
 
