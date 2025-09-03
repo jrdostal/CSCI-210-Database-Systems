@@ -1,0 +1,87 @@
+BEGIN Program
+
+    DEFINE PARTICIPANT_FILE as "participant.dat"
+    DEFINE SURVEY_FILE as "survey.dat"
+
+    FUNCTION add_participant()
+        PROMPT user for First Name, Last Name, Age, and Gender
+        
+        TRY to open PARTICIPANT_FILE to read existing participants
+            COUNT the number of lines in the file to determine the next available participant ID
+        CATCH error IF file does not exist
+            SET participant ID to 1
+
+        IF participant ID is EVEN THEN
+            SET Treatment to "StudyMor"
+        ELSE
+            SET Treatment to "Placebo"
+
+        OPEN PARTICIPANT_FILE in APPEND mode
+            WRITE participant ID, First Name, Last Name, Age, Gender, Treatment
+        CLOSE file
+
+        PRINT "Participant added with ID and Treatment"
+
+    FUNCTION display_participants()
+        TRY to open PARTICIPANT_FILE
+            READ and STORE participant records
+            IF file is EMPTY
+                PRINT "No participants found"
+                RETURN
+            ENDIF
+
+            PRINT "List of Participants:"
+            FOR each participant in the file
+                EXTRACT participant details
+                PRINT ID, Name, Age, Gender, and Treatment
+            ENDFOR
+        CATCH error IF file does not exist
+            PRINT "No participant records found"
+    
+    FUNCTION collect_survey()
+        CALL display_participants()
+        PROMPT user to enter a Participant ID
+
+        PROMPT user with survey questions:
+            "Did you have headaches?" (yes/no)
+            "Did you have constipation?" (yes/no)
+            "Did you have difficulty sleeping?" (yes/no)
+            "List any other side effects" (or "none")
+            "Did you feel like you could study more?" (yes/no)
+
+        GET current date
+
+        OPEN SURVEY_FILE in APPEND mode
+            WRITE Date, Participant ID, Survey Responses
+        CLOSE file
+
+        PRINT "Survey recorded successfully."
+
+    FUNCTION main()
+        WHILE True
+            DISPLAY Menu:
+                1. Add New Participant
+                2. Collect Survey for Participant
+                3. Display Participants
+                4. Quit
+
+            PROMPT user for choice
+
+            IF choice == "1" THEN
+                CALL add_participant()
+            ELSE IF choice == "2" THEN
+                CALL collect_survey()
+            ELSE IF choice == "3" THEN
+                CALL display_participants()
+            ELSE IF choice == "4" THEN
+                PRINT "Exiting program."
+                EXIT loop
+            ELSE
+                PRINT "Invalid choice. Try again."
+            ENDIF
+
+        ENDWHILE
+
+    CALL main()
+
+END Program
