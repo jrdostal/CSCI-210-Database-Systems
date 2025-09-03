@@ -1,0 +1,11 @@
+Do you think your program will help the study keep track of the research data?
+
+I think this program is one way to keep track of survey results, but it is very inefficient, and there is no way to organize the data or extract it for proper analysis.
+
+Describe how you might add functionality to calculate the statistics.
+
+One method to calculate some statistics from this program would be to add up the total number of participants. Another method would be to take the average response for each survery question based on whether the participant was in the placebo group or not.
+
+What things do you think will be easier and what things are more difficult using file I/O instead of a database?
+
+Accessing the data, maintaining security, and performing calculations are all more difficult with the file I/O system. Creating relationships and organizing the data are all also easier in a database. Nearly every facet of a database if easier, except for the actual program creation. This is the one thing that is simpler for the file I/O system.
