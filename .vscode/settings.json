@@ -1,0 +1,6 @@
+{
+    "workbench.editor.autoLockGroups": {
+        "sqlite-viewer.view": true,
+        "sqlite-viewer.option": true
+    }
+}
