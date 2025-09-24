@@ -1,1 +1,1 @@
-select * from Customer where CUS_CODE > 10013;
+DROP EMPLOYEE
