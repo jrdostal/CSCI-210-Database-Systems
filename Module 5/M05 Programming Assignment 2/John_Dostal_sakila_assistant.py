@@ -12,6 +12,7 @@ from math import e
 import sqlite3
 
 # Database Connection Function
+# Note: Ensure the database file path is correct, as I had to change the path to run it on my machine.
 def connect_db(db_name="Module 5/M05 Programming Assignment 2/sakila.db"):
     try:
         return sqlite3.connect(db_name)
