@@ -1,0 +1,36 @@
+-- SQLite
+
+
+--Q1.sql Insert a new Customer into the Customer table
+INSERT INTO EMPLOYEE (CUS_CODE, CUSL_NAME, CUSF_NAME, INITIAL, CUS_AREACODE, CUS_PHONE, CUS_BALANCE) VALUES
+('10020', 'Doe',   'John',   'A', '312', '555-1987', '250.00');
+
+--Q2.sql Insert a new invoice for the customer John Doe
+INSERT INTO INVOICE (INV_NUMBER, CUS_CODE, OMV_DATE) VALUES
+('1009', '10020', '2023-05-05');
+
+--Q3.sql Add a line item to the new invoice for product 13-Q2/P2 with quantity 3 and price 14.99
+INSERT INTO LINE (INV_NUMBER, LINE_NUMBER, P_CODE, LINE_UNITS, LINE_PRICE) VALUES
+('1009', '1', '13-Q2/P2', '3', '14.99');
+
+--Q4.sql Insert a new product into the Product table
+INSERT INTP PRODUCT (P_CODE, P_DESCRIPT, P_INDATE, P_QOH, P_MIN, P_PRICE, P_DISCOUNT, V_CODE) VALUES
+('99-X1/Z9', 'Super Widget', '2023-05-01', '500', '25', '29.95', '0.10', '21344');
+
+--Q5.sql Update John Doe’s balance to reflect a payment of $100.00 (new balance: $150.00)
+UPDATE CUSTOMER SET CUS_BALANCE = '150.00' WHERE CUS_CODE = '10020';
+
+--Q6.sql Update the product '13-Q2/P2' to change the P_PRICE to 17.95 and set P_DISCOUNT to 0.05
+UPDATE PRODUCT SET P_PRICE = '17.95', P_DISCOUNT = '0.05' WHERE P_CODE = '13-Q2/P2';
+
+--Q7.sql Delete the LINE entry you created for invoice 1009 and product '13-Q2/P2'
+DELETE FROM LINE WHERE INVOICE = '1009' AND P_CODE = '13-Q2/P2';
+
+--Q8.sql Delete invoice 1009
+DELETE FROM INVOICE WHERE INV_NUMBER = '1009';
+
+--Q9.sql Delete John Doe’s customer record
+DELETE FROM CUSTOMER WHERE CUS_CODE = '10020';
+
+--Q10.sql Delete the product '99-X1/Z9'
+DELETE FROM PRODUCT WHERE P_CODE = '99-X1/Z9';

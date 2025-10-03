@@ -1,0 +1,2 @@
+--Q8.sql Delete invoice 1009
+DELETE FROM INVOICE WHERE INV_NUMBER = '1009';
