@@ -13,52 +13,85 @@ import time
 # functions to create the SQL queries to be explained/run
 def query_1(sql_query):
     sql_query = str("""
-    SELECT title, description, name
-    FROM film 
-    JOIN language ON film.language_id = language.language_id 
+    SELECT f.title, f.description, l.name
+    FROM film AS f
+    JOIN language AS l ON f.language_id = l.language_id
     LIMIT 300;
     """)
     return sql_query
 
 def query_2(sql_query):
     sql_query = str("""
-    SELECT customer_id 
-    FROM rental 
-    JOIN inventory ON rental.inventory_id = inventory.inventory_id
-    JOIN film ON inventory.film_id = film.film_id
-    WHERE film.title = 'MONTEZUMA COMMAND';
+    SELECT DISTINCT r.customer_id
+    FROM rental AS r
+    JOIN inventory AS i ON r.inventory_id = i.inventory_id
+    JOIN film AS f ON i.film_id = f.film_id
+    WHERE f.title = 'MONTEZUMA COMMAND';
     """)
     return sql_query
 
 def query_3(sql_query):
     sql_query = str("""
-    SELECT first_name, last_name, sum(amount)
-    FROM customer 
-    JOIN payment ON customer.customer_id = payment.customer_id
-    GROUP BY customer.customer_id, first_name, last_name;
+    SELECT c.customer_id, c.first_name, c.last_name, SUM(p.amount) AS total_amount
+    FROM customer AS c
+    JOIN payment AS p ON c.customer_id = p.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name;
     """)
     return sql_query
 
 def query_4(sql_query):
     sql_query = str("""
-    SELECT distinct actor.*
-    FROM actor 
-    JOIN film_actor ON actor.actor_id = film_actor.actor_id
-    JOIN film ON film_actor.film_id = film.film_id
-    WHERE film.rental_rate = .99;
+    SELECT DISTINCT a.actor_id, a.first_name, a.last_name
+    FROM actor AS a
+    JOIN film_actor AS fa ON a.actor_id = fa.actor_id
+    JOIN film AS f ON fa.film_id = f.film_id
+    WHERE f.rental_rate = 0.99;
     """)
     return sql_query
 
 def query_5(sql_query):
     sql_query = str("""
-    SELECT first_name, last_name, address, city, country, postal_code, phone 
-    FROM customer 
-    JOIN address ON customer.address_id = address.address_id 
-    JOIN city ON address.city_id = city.city_id 
-    JOIN country ON city.country_id = country.country_id 
-    WHERE customer_id IN (SELECT customer_id FROM rental WHERE return_date IS NULL);
+    SELECT DISTINCT c.first_name, c.last_name, a.address, ci.city, co.country, a.postal_code, a.phone
+    FROM customer AS c
+    JOIN address AS a ON c.address_id = a.address_id
+    JOIN city AS ci ON a.city_id = ci.city_id
+    JOIN country AS co ON ci.country_id = co.country_id
+    JOIN rental AS r ON c.customer_id = r.customer_id
+    WHERE r.return_date IS NULL;
     """)
     return sql_query
+
+def create_indexes(cursor):
+
+    # Connect to the database
+    conn = connect_to_database()
+    if conn is None:
+        return
+
+    cursor = conn.cursor()
+
+    # Create indexes to optimize query performance
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_film_language_id ON film(language_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_language_language_id ON language(language_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_film_title ON film(title);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_inventory_film_id ON inventory(film_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_rental_inventory_id ON rental(inventory_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_payment_customer_id ON payment(customer_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_film_rental_rate ON film(rental_rate);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_film_actor_film_id ON film_actor(film_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_film_actor_actor_id ON film_actor(actor_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_rental_customer_id ON rental(customer_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_rental_return_date ON rental(return_date);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_address_address_id ON address(address_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_city_city_id ON city(city_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_country_country_id ON country(country_id);")
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
+    # Notify the user that indexes have been created
+    print("Indexes created successfully.")
 
 # function to connect to the SQLite database
 def connect_to_database(db_name = "Module 7/sakila-1.db"):
@@ -130,6 +163,8 @@ def main():
 
 # Run the main function
 if __name__ == "__main__":
+
+    create_indexes(None)
     main()
     print("\n All query explanations have been displayed.")
     print("Exiting program. \n")

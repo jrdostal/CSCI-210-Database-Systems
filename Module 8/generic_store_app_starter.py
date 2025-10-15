@@ -1,3 +1,12 @@
+"""
+Program name: generic_store_app_starter.py
+Author: John Dostal
+Date last updated: 10/14/2025
+Purpose: Starter code for a generic store application using SQLite.
+         Students will complete the SQL operations to manage customers,
+         products, and purchases.
+"""
+
 import sqlite3
 from datetime import datetime
 
