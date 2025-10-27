@@ -29,6 +29,7 @@ CREATE TABLE Spaceship(SpaceshipID INTEGER NOT NULL UNIQUE
 , Modifications VARCHAR(35)
 , SalePrice DECIMAL
 , LastMaintenanceDate DATE
+, Available INTEGER
 , PRIMARY KEY (SpaceshipID)
 , FOREIGN KEY (VendorID) REFERENCES Vendor(VendorID) ON UPDATE CASCADE
 , FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID) ON UPDATE CASCADE);

@@ -21,22 +21,21 @@ INSERT INTO Customer(CustomerID, CustomerFirstName, CustomerLastName, CompanyNam
 (14, 'Charlotte', 'Flores', 'Xi Technologies', '555-4445', 'charlotte.f@xi.com', '14 Xi Dr', '1994-01-30', 'Yes', NULL),
 (15, 'Elijah', 'Green', 'Omicron Solutions', '555-5556', 'elijah.g@omicron.com', '15 Omicron Ave', '1992-05-12', 'Yes', NULL);
 
-INSERT INTO Spaceship(SpaceshipID, SerialNumber, VendorID, InvoiceID, Make, Model, ShipName, ModelYear, Condition, Modifications, SalePrice, LastMaintenanceDate) VALUES
-(1, 'SN1001', 11, 16, 'Orion Shipyards', 'T-65', 'X-Wing', 2024, 'New', 'None', 1200000, '2024-06-12'),
-(2, 'SN1002', 11, 17, 'Orion Shipyards', 'BTL-A4', 'Y-Wing', 2021, 'Used', 'Upgraded engines', 950000, '2024-04-15'),
-(3, 'SN1003', 11, 18, 'Orion Shipyards', 'RZ-1', 'A-Wing', 2020, 'Refurbished', 'New avionics', 800000, '2024-06-14'),
-(4, 'SN1004', 14, 19, 'Stellar Forge Industries', 'LN', 'TIE Fighter', 2019, 'Used', 'Custom paint', 700000, '2024-02-18'),
-(5, 'SN1005', 12, 20, 'NovaStar Manufacturing', 'YT-1300', 'Millennium Falcon', 2024, 'New', 'Smuggling compartments', 5000000, '2024-06-16'),
-(6, 'SN1006', 14, 21, 'Stellar Forge Industries', 'Firespray-31', 'Slave I', 2021, 'Used', 'Modified weapons', 2200000, '2024-01-25'),
-(7, 'SN1007', 15, 22, 'Cosmos Shipbuilders', 'Imperial I', 'Star Destroyer', 2018, 'Used', 'Reinforced shields', 75000000, '2024-06-18'),
-(8, 'SN1008', 14, 23, 'Stellar Forge Industries', 'IN', 'TIE Interceptor', 2020, 'Refurbished', 'Upgraded targeting', 1100000, '2024-04-05'),
-(9, 'SN1009', 13, 24, 'Pulsar Dynamics', 'ASF-01', 'B-Wing', 2024, 'New', 'Enhanced armor', 1300000, '2024-06-20'),
-(10, 'SN1010', 15, 25, 'Cosmos Shipbuilders', 'Tydirium', 'Shuttle', 2021, 'Used', 'None', 600000, '2024-03-30'),
-(11, 'SN1011', 14, 26, 'Stellar Forge Industries', 'DX-1', 'Defender', 2024, 'New', 'None', 1400000, '2024-07-01'),
-(12, 'SN1012', 14, 27, 'Stellar Forge Industries', 'IX-5', 'Interceptor', 2022, 'Used', 'Reinforced armor', 1000000, '2024-06-28'),
-(13, 'SN1013', 12, 28, 'NovaStar Manufacturing', 'FX-7', 'Freighter', 2021, 'Refurbished', 'Expanded cargo bay', 1800000, '2024-06-05'),
-(14, 'SN1014', 15, 29, 'Cosmos Shipbuilders', 'CX-9', 'Cruiser', 2024, 'New', 'Custom bridge', 2200000, '2024-07-10'),
-(15, 'SN1015', 13, 30, 'Pulsar Dynamics', 'SX-3', 'Scout', 2022, 'Used', 'Stealth plating', 900000, '2024-06-12');
+INSERT INTO Spaceship(SpaceshipID, SerialNumber, VendorID, InvoiceID, Make, Model, ShipName, ModelYear, Condition, Modifications, SalePrice, LastMaintenanceDate, Available) VALUES
+(1, 'SN1001', 11, 16, 'Orion Shipyards', 'T-65', 'X-Wing', 2024, 'New', 'None', 1200000, '2024-06-12', 1),
+(2, 'SN1002', 11, 17, 'Orion Shipyards', 'BTL-A4', 'Y-Wing', 2021, 'Used', 'Upgraded engines', 950000, '2024-04-15', 1),
+(3, 'SN1003', 11, 18, 'Orion Shipyards', 'RZ-1', 'A-Wing', 2020, 'Refurbished', 'New avionics', 800000, '2024-06-14', 1),
+(4, 'SN1004', 14, 19, 'Stellar Forge Industries', 'LN', 'TIE Fighter', 2019, 'Used', 'Custom paint', 700000, '2024-02-18', 1),
+(5, 'SN1005', 12, 20, 'NovaStar Manufacturing', 'YT-1300', 'Millennium Falcon', 2024, 'New', 'Smuggling compartments', 5000000, '2024-06-16', 1),
+(6, 'SN1006', 14, 21, 'Stellar Forge Industries', 'Firespray-31', 'Slave I', 2021, 'Used', 'Modified weapons', 2200000, '2024-01-25', 1),
+(7, 'SN1007', 15, 22, 'Cosmos Shipbuilders', 'Imperial I', 'Star Destroyer', 2018, 'Used', 'Reinforced shields', 75000000, '2024-06-18', 1),
+
+(8, 'SN1008', 14, 23, 'Stellar Forge Industries', 'IN', 'TIE Interceptor', 2020, 'Refurbished', 'Upgraded targeting', 1100000, '2024-04-05', 1),
+(9, 'SN1009', 13, 24, 'Pulsar Dynamics', 'ASF-01', 'B-Wing', 2024, 'New', 'Enhanced armor', 1300000, '2024-06-20', 1),
+(10, 'SN1010', 15, 25, 'Cosmos Shipbuilders', 'Tydirium', 'Shuttle', 2021, 'Used', 'None', 600000, '2024-03-30', 1),
+(13, 'SN1013', 12, 28, 'NovaStar Manufacturing', 'FX-7', 'Freighter', 2021, 'Refurbished', 'Expanded cargo bay', 1800000, '2024-06-05', 1),
+(14, 'SN1014', 15, 29, 'Cosmos Shipbuilders', 'CX-9', 'Cruiser', 2024, 'New', 'Custom bridge', 2200000, '2024-07-10', 1),
+(15, 'SN1015', 13, 30, 'Pulsar Dynamics', 'SX-3', 'Scout', 2022, 'Used', 'Stealth plating', 900000, '2024-06-12', 1);
 
 INSERT INTO Orders(OrderID, InvoiceID, CustomerID, SpaceshipID, OrderDateTime, Destination, OrderStatus, DiscountApplied, OrderTotal) VALUES
 (1, 1, 1, NULL, '2023-06-01 09:30:00', 'Mars Base Alpha', 'Completed', 0, 123750),

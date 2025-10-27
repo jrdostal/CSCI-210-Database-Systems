@@ -1,0 +1,221 @@
+--SQLITE
+
+--Start new transaction
+BEGIN TRANSACTION;
+
+--Insert sample data into tables needed for the database
+INSERT INTO Customer(CustomerID, CustomerFirstName, CustomerLastName, CompanyName, PhoneNumber, Email, Address, DateOfBirth, IdentityVerified, VendorID) VALUES
+(1, 'John', 'Smith', 'Galactic Supplies Co.', '555-1111', 'john.smith@galacticsupply.com', '1 Alpha Way', '1980-05-10', 'Yes', 1),
+(2, 'Emily', 'Johnson', 'Starlight Engineering', '555-2222', 'emily.j@starlightengineer.com', '200 Nova Lane', '1990-07-15', 'Yes', 2),
+(3, 'Carlos', 'Ruiz', 'Hyperdrive Mechanics', '555-3333', 'c.ruiz@hyperdrivemechanics.com', '300 Warp Dr', '1985-03-20', 'Yes', 3),
+(4, 'Sophia', 'Martinez', 'Quantum Fuel Ltd.', '555-4444', 's.martinez@quantumfuel.com', '4 Delta Dr', '1992-12-01', 'Yes', 4),
+(5, 'Ethan', 'Ford', 'Nebula Tech', '555-5555', 'e.ford@nebulatech.com', '5 Epsilon Ct', '1988-06-30', 'Yes', 5),
+(6, 'Fiona', 'Garcia', 'Zeta Enterprises', '555-6666', 'f.garcia@zeta.com', '600 Stellar St', '1995-09-05', 'Yes', 6),
+(7, 'James', 'Wilson', 'Lunar Logistics', '555-7777', 'j.wilson@lunarlogistics.com', '700 Orbit Ave', '1983-11-11', 'Yes', 7),
+(8, 'Isabella', 'Lopez', 'Asteroid Industries', '555-8888', 'isa.lopez@asteroidindustries.com', '800 Comet Cir', '1991-04-18', 'Yes', 8),
+(9, 'William', 'Clark', 'Iota Group', '555-9999', 'w.clark@iota.com', '900 Eclipse Pkwy', '1987-02-23', 'Yes', 9),
+(10, 'Jade', 'Adams', 'Solar Systems Inc.', '555-1010', 'jade.adams@solarsystems.com', '1000 Rainbow Rd', '1993-08-12', 'Yes', 10),
+(11, 'Lucas', 'Bennett', 'Lambda Corp', '555-1112', 'lucas.b@lambda.com', '11 Lambda Way', '1984-10-09', 'Yes', NULL),
+(12, 'Ava', 'Carter', 'Mu Enterprises', '555-2223', 'ava.c@mu.com', '12 Mu St', '1996-02-14', 'Yes', NULL),
+(13, 'Noah', 'Evans', 'Nu Systems', '555-3334', 'noah.e@nu.com', '13 Nu Blvd', '1989-07-25', 'Yes', NULL),
+(14, 'Charlotte', 'Flores', 'Xi Technologies', '555-4445', 'charlotte.f@xi.com', '14 Xi Dr', '1994-01-30', 'Yes', NULL),
+(15, 'Elijah', 'Green', 'Omicron Solutions', '555-5556', 'elijah.g@omicron.com', '15 Omicron Ave', '1992-05-12', 'Yes', NULL);
+
+INSERT INTO Spaceship(SpaceshipID, SerialNumber, VendorID, InvoiceID, Make, Model, ShipName, ModelYear, Condition, Modifications, SalePrice, LastMaintenanceDate, Available) VALUES
+(1, 'SN1001', 11, 16, 'Orion Shipyards', 'T-65', 'X-Wing', 2024, 'New', 'None', 1200000, '2024-06-12', 1),
+(2, 'SN1002', 11, 17, 'Orion Shipyards', 'BTL-A4', 'Y-Wing', 2021, 'Used', 'Upgraded engines', 950000, '2024-04-15', 1),
+(3, 'SN1003', 11, 18, 'Orion Shipyards', 'RZ-1', 'A-Wing', 2020, 'Refurbished', 'New avionics', 800000, '2024-06-14', 1),
+(4, 'SN1004', 14, 19, 'Stellar Forge Industries', 'LN', 'TIE Fighter', 2019, 'Used', 'Custom paint', 700000, '2024-02-18', 1),
+(5, 'SN1005', 12, 20, 'NovaStar Manufacturing', 'YT-1300', 'Millennium Falcon', 2024, 'New', 'Smuggling compartments', 5000000, '2024-06-16', 1),
+(6, 'SN1006', 14, 21, 'Stellar Forge Industries', 'Firespray-31', 'Slave I', 2021, 'Used', 'Modified weapons', 2200000, '2024-01-25', 1),
+(7, 'SN1007', 15, 22, 'Cosmos Shipbuilders', 'Imperial I', 'Star Destroyer', 2018, 'Used', 'Reinforced shields', 75000000, '2024-06-18', 1),
+(8, 'SN1008', 14, 23, 'Stellar Forge Industries', 'IN', 'TIE Interceptor', 2020, 'Refurbished', 'Upgraded targeting', 1100000, '2024-04-05', 1),
+(9, 'SN1009', 13, 24, 'Pulsar Dynamics', 'ASF-01', 'B-Wing', 2024, 'New', 'Enhanced armor', 1300000, '2024-06-20', 1),
+(10, 'SN1010', 15, 25, 'Cosmos Shipbuilders', 'Tydirium', 'Shuttle', 2021, 'Used', 'None', 600000, '2024-03-30', 1),
+(13, 'SN1013', 12, 28, 'NovaStar Manufacturing', 'FX-7', 'Freighter', 2021, 'Refurbished', 'Expanded cargo bay', 1800000, '2024-06-05', 1),
+(14, 'SN1014', 15, 29, 'Cosmos Shipbuilders', 'CX-9', 'Cruiser', 2024, 'New', 'Custom bridge', 2200000, '2024-07-10', 1),
+(15, 'SN1015', 13, 30, 'Pulsar Dynamics', 'SX-3', 'Scout', 2022, 'Used', 'Stealth plating', 900000, '2024-06-12', 1);
+
+INSERT INTO Orders(OrderID, InvoiceID, CustomerID, SpaceshipID, OrderDateTime, Destination, OrderStatus, DiscountApplied, OrderTotal) VALUES
+(1, 1, 1, NULL, '2023-06-01 09:30:00', 'Mars Base Alpha', 'Completed', 0, 123750),
+(2, 2, 2, NULL, '2023-06-02 10:30:00', 'Lunar Outpost', 'Completed', 4000, 99000),
+(3, 3, 3, NULL, '2023-06-03 11:30:00', 'Europa Station', 'Completed', 0, 37125),
+(4, 4, 4, NULL, '2023-06-04 12:30:00', 'Titan Colony', 'Pending', 800, 19800),
+(5, 5, 5, NULL, '2023-06-05 13:30:00', 'Alpha Centauri', 'Completed', 0, 495000),
+(6, 6, 6, NULL, '2023-06-06 14:30:00', 'Andromeda Outpost', 'Shipped', 3000, 74250),
+(7, 7, 7, NULL, '2023-06-07 15:30:00', 'Orion Belt', 'Pending', 0, 1237500),
+(8, 8, 8, NULL, '2023-06-08 16:30:00', 'Proxima Colony', 'Shipped', 3000, 74250),
+(9, 9, 9, NULL, '2023-06-09 17:30:00', 'Neptune Base', 'Completed', 0, 24750),
+(10, 10, 10, NULL, '2023-06-10 18:30:00', 'Pluto Station', 'Completed', 0, 37125),
+(11, 11, 11, NULL, '2023-07-01 09:50:00', 'Ceres Colony', 'Completed', 0, 61875),
+(12, 12, 12, NULL, '2023-07-02 10:20:00', 'Venus Station', 'Completed', 3000, 74250),
+(13, 13, 13, NULL, '2023-07-03 11:10:00', 'Callisto Outpost', 'Completed', 0, 74250),
+(14, 14, 14, NULL, '2023-07-04 13:25:00', 'Europa Hub', 'Pending Payment Processing', 5000, 185625),
+(15, 15, 15, NULL, '2023-07-05 14:40:00', 'Io Base', 'Completed', 0, 29700),
+(16, 16, 1, 1, '2024-06-22 09:30:00', 'Mars Base Alpha', 'Completed', 0, 1320000),
+(17, 17, 2, 2, '2024-06-23 09:30:00', 'Lunar Outpost', 'Completed', 40000, 1045000),
+(18, 18, 3, 3, '2024-06-24 09:30:00', 'Europa Station', 'Completed', 0, 880000),
+(19, 19, 4, 4, '2024-06-25 09:30:00', 'Titan Colony', 'Completed', 80000, 770000),
+(20, 20, 5, 5, '2024-06-26 09:30:00', 'Alpha Centauri', 'Completed', 0, 5500000),
+(21, 21, 6, 6, '2024-06-27 09:30:00', 'Andromeda Outpost', 'Pending Finance Approval', 30000, 2420000),
+(22, 22, 7, 7, '2024-06-28 09:30:00', 'Orion Belt', 'Completed', 0, 82500000),
+(23, 23, 8, 8, '2024-06-29 09:30:00', 'Proxima Colony', 'Shipped', 30000, 1210000),
+(24, 24, 9, 9, '2024-06-30 09:30:00', 'Neptune Base', 'Completed', 0, 1430000),
+(25, 25, 10, 10, '2024-07-01 09:30:00', 'Pluto Station', 'Completed', 0, 660000),
+(26, 26, 11, 11, '2024-07-02 09:30:00', 'Vega Orbital Dock', 'Completed', 0, 1540000),
+(27, 27, 12, 12, '2024-07-03 09:30:00', 'Kepler-442b Settlement', 'Completed', 30000, 1100000),
+(28, 28, 13, 13, '2024-07-04 09:30:00', 'Sagittarius Observation Post', 'Completed', 0, 1980000),
+(29, 29, 14, 14, '2024-07-05 09:30:00', 'Trappist-1e Frontier Post', 'Completed', 50000, 2420000),
+(30, 30, 15, 15, '2024-07-06 09:30:00', 'Neptune Shipyard Ring', 'Pending Finance Approval', 0, 990000);
+
+INSERT INTO OrderParts(OrderID, PartID, QuantityUsed) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 2),
+(6, 6, 1),
+(7, 7, 1),
+(8, 8, 3),
+(9, 9, 2),
+(10, 10, 1),
+(11, 11, 1),
+(12, 12, 2),
+(13, 13, 1),
+(14, 14, 1),
+(15, 15, 1);
+
+INSERT INTO Part(PartID, SpaceshipID, QuantityInStock, UnitPrice, PartName, PartDescription, Manufacturer, WarrantyExpirationDate, PartNumber, PartStatus) VALUES
+(1, 1, 10, 50000, 'Hyperdrive', 'FTL Drive', 'Hyperdrive Mechanics', '2025-01-01', 'HD-1001', 'Available'),
+(2, 2, 20, 20000, 'Laser Cannon', 'Weapon system', 'Nebula Tech', '2025-06-01', 'LC-2001', 'Available'),
+(3, 3, 15, 15000, 'Shield Generator', 'Defensive system', 'Asteroid Industries', '2025-03-01', 'SG-3001', 'Available'),
+(4, 4, 8, 8000, 'Navigation Computer', 'Nav system', 'Iota Group', '2024-12-01', 'NC-4001', 'Available'),
+(5, 5, 5, 100000, 'Cargo Hold', 'Large storage', 'Lunar Logistics', '2026-01-01', 'CH-5001', 'Available'),
+(6, 6, 12, 30000, 'Targeting System', 'Weapons guidance', 'Nebula Tech', '2025-02-01', 'TS-6001', 'Available'),
+(7, 7, 2, 500000, 'Bridge Module', 'Control center', 'Solar Systems Inc.', '2027-05-01', 'BM-7001', 'Available'),
+(8, 8, 25, 10000, 'Sensor Array', 'Detection system', 'Asteroid Industries', '2026-11-01', 'SA-8001', 'Available'),
+(9, 9, 30, 5000, 'Hull Plating', 'Armor plates', 'Galactic Supplies Co.', '2025-09-01', 'HP-9001', 'Available'),
+(10, 10, 18, 15000, 'Life Support', 'Atmosphere control', 'Solar Systems Inc.', '2026-03-01', 'LS-10001', 'Available'),
+(11, 11, 12, 25000, 'Stabilizer', 'Flight control stabilizer', 'Galactic Supplies Co.', '2026-01-01', 'ST-1101', 'Available'),
+(12, 12, 20, 15000, 'Laser Turret', 'Secondary weapon system', 'Nebula Tech', '2025-07-01', 'LT-1201', 'Available'),
+(13, 13, 10, 30000, 'Cargo Frame', 'Reinforced cargo structure', 'Galactic Supplies Co.', '2026-02-01', 'CF-1301', 'Available'),
+(14, 14, 5, 75000, 'Command Module', 'Bridge operations module', 'Solar Systems Inc.', '2027-01-01', 'CM-1401', 'Available'),
+(15, 15, 18, 12000, 'Stealth Sensor', 'Low-profile detection unit', 'Starlight Engineering', '2025-11-01', 'SS-1501', 'Available');
+
+INSERT INTO Payment(PaymentID, InvoiceID, VendorID, OrderID, CustomerID, PaymentMethod, PaymentAmount, PaymentDateTime, TransactionID, PaymentStatus, Currency) VALUES
+(1, 1, 3, 1, 1, 'Credit Card', 123750, '2023-06-01 12:00:00', 'TX-001', 'Completed', 'Republic Credits'),
+(2, 2, 5, 2, 2, 'Wire Transfer', 99000, '2023-06-02 13:00:00', 'TX-002', 'Completed', 'Republic Credits'),
+(3, 3, 8, 3, 3, 'Credit Card', 37125, '2023-06-03 14:00:00', 'TX-003', 'Completed', 'Republic Credits'),
+(4, 4, 9, 4, 4, 'Wire Transfer', 19800, '2023-06-04 15:00:00', 'TX-004', 'Pending', 'Republic Credits'),
+(5, 5, 7, 5, 5, 'Credit Card', 495000, '2023-06-05 16:00:00', 'TX-005', 'Completed', 'Republic Credits'),
+(6, 6, 5, 6, 6, 'Wire Transfer', 74250, '2023-06-06 17:00:00', 'TX-006', 'Completed', 'Republic Credits'),
+(7, 7, 10, 7, 7, 'Credit Card', 1237500, '2023-06-07 18:00:00', 'TX-007', 'Pending', 'Republic Credits'),
+(8, 8, 8, 8, 8, 'Wire Transfer', 74250, '2023-06-08 19:00:00', 'TX-008', 'Completed', 'Republic Credits'),
+(9, 9, 1, 9, 9, 'Credit Card', 24750, '2023-06-09 20:00:00', 'TX-009', 'Completed', 'Republic Credits'),
+(10, 10, 10, 10, 10, 'Wire Transfer', 37125, '2023-06-10 21:00:00', 'TX-010', 'Completed', 'Republic Credits'),
+(11, 11, NULL, 11, 11, 'Credit Card', 154687.50, '2023-07-01 16:00:00', 'TX-011', 'Completed', 'USD'),
+(12, 12, NULL, 12, 12, 'Wire Transfer', 168750, '2023-07-02 17:00:00', 'TX-012', 'Completed', 'USD'),
+(13, 13, NULL, 13, 13, 'Credit Card', 168750, '2023-07-03 18:00:00', 'TX-013', 'Completed', 'USD'),
+(14, 14, NULL, 14, 14, 'Wire Transfer', 421875, '2023-07-04 19:00:00', 'TX-014', 'Pending', 'USD'),
+(15, 15, NULL, 15, 15, 'Credit Card', 67500, '2023-07-05 20:00:00', 'TX-015', 'Completed', 'USD'),
+(16, 16, 3, 1, 1, 'Financed/Credit Card', 1320000, '2024-06-22 14:00:00', 'TX-016', 'Completed', 'Republic Credits'),
+(17, 17, 5, 2, 2, 'Financed/Credit Card', 1045000, '2024-06-23 14:00:00', 'TX-017', 'Completed', 'Republic Credits'),
+(18, 18, 8, 3, 3, 'Credit Card', 880000, '2024-06-24 14:00:00', 'TX-018', 'Completed', 'Republic Credits'),
+(19, 19, 9, 4, 4, 'Financed/Credit Card', 770000, '2024-06-25 14:00:00', 'TX-019', 'Pending', 'Republic Credits'),
+(20, 20, 7, 5, 5, 'Financed/Credit Card', 5500000, '2024-06-26 14:00:00', 'TX-020', 'Completed', 'Republic Credits'),
+(21, 22, 10, 7, 7, 'Financed/Credit Card', 2420000, '2024-06-28 14:00:00', 'TX-021', 'Pending', 'Republic Credits'),
+(22, 23, 8, 8, 8, 'Wire Transfer', 1210000, '2024-06-29 14:00:00', 'TX-022', 'Completed', 'Republic Credits'),
+(23, 24, 1, 9, 9, 'Financed/Credit Card', 1430000, '2024-06-30 14:00:00', 'TX-023', 'Completed', 'Republic Credits'),
+(24, 26, NULL, 11, 11, 'Credit Card', 3850000, '2024-07-02 14:00:00', 'TX-024', 'Completed', 'USD'),
+(25, 27, NULL, 12, 12, 'Wire Transfer', 2500000, '2024-07-03 14:00:00', 'TX-025', 'Completed', 'USD'),
+(26, 28, NULL, 13, 13, 'Credit Card', 4500000, '2024-07-04 14:00:00', 'TX-026', 'Completed', 'USD'),
+(27, 29, NULL, 14, 14, 'Wire Transfer', 5500000, '2024-07-05 14:00:00', 'TX-027', 'Pending', 'USD'),
+(28, 30, NULL, 15, 15, 'Credit Card', 2250000, '2024-07-06 14:00:00', 'TX-028', 'Completed', 'USD');
+
+INSERT INTO Employee(EmployeeID, EmployeeFirstName, EmployeeLastName, Role, HireDate, Department, SupervisorID, EmploymentStatus, Salary) VALUES
+(1, 'Alan', 'Reed', 'Engineer', '2020-01-10', 'Engineering', NULL, 'Active', 85000),
+(2, 'Brenda', 'Nguyen', 'Technician', '2019-05-12', 'Maintenance', 1, 'Active', 60000),
+(3, 'Charles', 'Patel', 'Manager', '2018-09-20', 'Operations', NULL, 'Active', 95000),
+(4, 'Diana', 'Wong', 'Pilot', '2021-03-15', 'Flight', 3, 'Active', 120000),
+(5, 'Ethan', 'Garcia', 'Analyst', '2022-06-01', 'Finance', 3, 'Active', 70000),
+(6, 'Fiona', 'Olsen', 'Clerk', '2020-11-10', 'Administration', 3, 'Active', 50000),
+(7, 'George', 'Brown', 'Engineer', '2017-08-25', 'Engineering', 1, 'Inactive', 80000),
+(8, 'Holly', 'Chen', 'Technician', '2021-12-05', 'Maintenance', 1, 'Active', 62000),
+(9, 'Isaac', 'Lopez', 'Pilot', '2019-04-14', 'Flight', 3, 'Active', 125000),
+(10, 'Julia', 'Martinez', 'Manager', '2018-07-07', 'Finance', NULL, 'Active', 98000);
+
+INSERT INTO MaintenanceRequest(MaintenanceRequestID, SpaceshipID, PartID, RequestedBy, RequestDate, RequestType, RequestDescription, PriorityLevel, RequestStatus, CompletionDate) VALUES
+(1, 1, 1, 2, '2024-06-11', 'Repair', 'Hyperdrive malfunction', 'High', 'Completed', '2024-06-12'),
+(2, 2, 2, 8, '2024-06-12', 'Replace', 'Laser cannon overheating', 'Medium', 'Pending Manager Review', NULL),
+(3, 3, 3, 2, '2024-06-13', 'Inspection', 'Shield generator check', 'Low', 'Completed', '2024-06-14'),
+(4, 4, 4, 8, '2024-06-14', 'Repair', 'Navigation error', 'High', 'In Progress', NULL),
+(5, 5, 5, 2, '2024-06-15', 'Upgrade', 'Cargo hold expansion', 'Medium', 'Completed', '2024-06-16'),
+(6, 6, 6, 8, '2024-06-16', 'Repair', 'Targeting system failure', 'High', 'Pending Manager Review', NULL),
+(7, 7, 7, 2, '2024-06-17', 'Inspection', 'Bridge systems check', 'Low', 'Completed', '2024-06-18'),
+(8, 8, 8, 8, '2024-06-18', 'Replace', 'Sensor array damaged', 'High', 'In Progress', NULL),
+(9, 9, 9, 2, '2024-06-19', 'Repair', 'Hull plating cracks', 'Medium', 'Completed', '2024-06-20'),
+(10, 10, 10, 8, '2024-06-20', 'Inspection', 'Life support system', 'High', 'Pending Manager Review', NULL);
+
+INSERT INTO FinanceRequest(FinanceRequestID, SpaceshipID, RequestedBy, ReviewedBy, RequestDate, RequestType, FinancedAmount, DateReviewed, ApprovalStatus, RequestNotes) VALUES
+(1, 1, 5, 3, '2024-06-22', 'Lease', 1200000, '2024-06-22', 'Approved', 'For Alpha project'),
+(2, 2, 5, 3, '2024-06-23', 'Loan', 950000, '2024-06-23', 'Approved', 'For Beta expansion'),
+(3, 3, 5, 3, '2024-06-24', 'Lease', 800000, '2024-06-24', 'Denied', 'Budget exceeded'),
+(4, 4, 5, 3, '2024-06-25', 'Loan', 700000, '2024-06-25', 'Approved', 'Urgent need'),
+(5, 5, 5, 3, '2024-06-26', 'Lease', 5000000, '2024-06-26', 'Approved', 'Cargo upgrade'),
+(6, 6, 5, 3, '2024-06-27', 'Loan', 750000, NULL, 'Pending', 'Awaiting docs'),
+(7, 7, 5, 3, '2024-06-28', 'Lease', 75000000, '2024-06-28', 'Approved', 'Military use'),
+(8, 8, 5, 3, '2024-06-29', 'Loan', 1100000, '2024-06-29', 'Denied', 'Too risky'),
+(9, 9, 5, 3, '2024-06-30', 'Lease', 1300000, '2024-06-30', 'Approved', 'Armor upgrade'),
+(10, 10, 5, 3, '2024-07-01', 'Loan', 250000, NULL, 'Pending', 'Needs review');
+
+INSERT INTO Invoice(InvoiceID, InvoiceDateTime, InvoiceAmount, TaxAmount, Currency, VendorID, CustomerID, OrderID, PaymentID, DueDate, DateReceived, ReviewedBy, InvoiceNumber) VALUES
+(1, '2023-06-01 10:00:00', 112500, 11250, 'Republic Credits', 3, 1, 1, 1, '2023-07-01', '2023-06-01', '1', '10000001'),
+(2, '2023-06-02 11:00:00', 90000, 9000, 'Republic Credits', 5, 2, 2, 2, '2023-07-02', '2023-06-02', '3', '10000002'),
+(3, '2023-06-03 12:00:00', 33750, 3375, 'Republic Credits', 8, 3, 3, 3, '2023-07-03', '2023-06-03', '3', '10000003'),
+(4, '2023-06-04 13:00:00', 18000, 1800, 'Republic Credits', 9, 4, 4, 4, '2023-07-04', '2023-06-04', '1', '10000004'),
+(5, '2023-06-05 14:00:00', 450000, 45000, 'Republic Credits', 7, 5, 5, 5, '2023-07-05', '2023-06-05', '3', '10000005'),
+(6, '2023-06-06 15:00:00', 67500, 6750, 'Republic Credits', 5, 6, 6, 6, '2023-07-06', '2023-06-06', '3', '10000006'),
+(7, '2023-06-07 16:00:00', 1125000, 112500, 'Republic Credits', 10, 7, 7, 7, '2023-07-07', '2023-06-07', '10', '10000007'),
+(8, '2023-06-08 17:00:00', 67500, 6750, 'Republic Credits', 8, 8, 8, 8, '2023-07-08', '2023-06-08', '3', '10000008'),
+(9, '2023-06-09 18:00:00', 22500, 2250, 'Republic Credits', 1, 9, 9, 9, '2023-07-09', '2023-06-09', '3', '10000009'),
+(10, '2023-06-10 19:00:00', 33750, 3375, 'Republic Credits', 10, 10, 10, 10, '2023-07-10', '2023-06-10', '1', '10000010'),
+(11, '2023-07-01 10:15:00', 56250, 5625, 'Republic Credits', NULL, 11, 11, 11, '2023-08-01', '2023-07-01', '3', '10000011'),
+(12, '2023-07-02 11:45:00', 67500, 6750, 'Republic Credits', NULL, 12, 12, 12, '2023-08-02', '2023-07-02', '3', '10000012'),
+(13, '2023-07-03 12:30:00', 67500, 6750, 'Republic Credits', NULL, 13, 13, 13, '2023-08-03', '2023-07-03', '3', '10000013'),
+(14, '2023-07-04 14:00:00', 168750, 16875, 'Republic Credits', NULL, 14, 14, 14, '2023-08-04', '2023-07-04', '10', '10000014'),
+(15, '2023-07-05 15:30:00', 27000, 29700, 'Republic Credits', NULL, 15, 15, 15, '2023-08-05', '2023-07-05', '1', '10000015'),
+(16, '2024-06-22 10:30:00', 1200000, 120000, 'Republic Credits', 1, 1, 1, 16, '2024-07-22', '2024-06-22', '3', '10000016'),
+(17, '2024-06-23 10:30:00', 950000, 95000, 'Republic Credits', 2, 2, 2, 17, '2024-07-23', '2024-06-23', '3', '10000017'),
+(18, '2024-06-24 10:30:00', 800000, 80000, 'Republic Credits', 3, 3, 3, 18, '2024-07-24', '2024-06-24', '3', '10000018'),
+(19, '2024-06-25 10:30:00', 700000, 70000, 'Republic Credits', 4, 4, 4, 19, '2024-07-25', '2024-06-25', '3', '10000019'),
+(20, '2024-06-26 10:30:00', 5000000, 500000, 'Republic Credits', 5, 5, 5, 20, '2024-07-26', '2024-06-26', '3', '10000020'),
+(21, '2024-06-28 10:30:00', 75000000, 7500000, 'Republic Credits', 7, 7, 7, 21, '2024-07-28', '2024-06-28', '3', '10000021'),
+(22, '2024-06-29 10:30:00', 1100000, 110000, 'Republic Credits', 8, 8, 8, 22, '2024-07-29', '2024-06-29', '3', '10000022'),
+(23, '2024-06-30 10:30:00', 1300000, 130000, 'Republic Credits', 9, 9, 9, 23, '2024-07-30', '2024-06-30', '3', '10000023'),
+(24, '2024-07-02 10:30:00', 1400000, 140000, 'Republic Credits', NULL, 11, 11, 24, '2024-08-02', '2024-07-02', '3', '10000024'),
+(25, '2024-07-03 10:30:00', 1000000, 100000, 'Republic Credits', NULL, 12, 12, 25, '2024-08-03', '2024-07-03', '3', '10000025'),
+(26, '2024-07-04 10:30:00', 1800000, 180000, 'Republic Credits', NULL, 13, 13, 26, '2024-08-04', '2024-07-04', '3', '10000026'),
+(27, '2024-07-05 10:30:00', 2200000, 220000, 'Republic Credits', NULL, 14, 14, 27, '2024-08-05', '2024-07-05', '3', '10000027'),
+(28, '2024-07-06 10:30:00', 900000, 90000, 'Republic Credits', NULL, 15, 15, 28, '2024-08-06', '2024-07-06', '3', '10000028');
+
+INSERT INTO Vendor(VendorID, VendorName, VendorContact, PhoneNumber, Address, VendorType, VendorStatus, VendorRating, ContractStartDate, ContractEndDate) VALUES
+(1, 'Galactic Supplies Co.', 'John Smith', '555-1111', '1 Alpha Way', 'Parts', 'Active', 5, '2020-01-01', '2030-01-01'),
+(2, 'Starlight Engineering', 'Emily Johnson', '555-2222', '200 Nova Lane', 'Engineering', 'Active', 4, '2019-03-15', '2029-03-15'),
+(3, 'Hyperdrive Mechanics', 'Carlos Ruiz', '555-3333', '300 Warp Dr', 'Navigation', 'Active', 5, '2021-06-10', '2031-06-10'),
+(4, 'Quantum Fuel Ltd.', 'Sophia Martinez', '555-4444', '4 Delta Dr', 'Fuel', 'Active', 3, '2018-09-01', '2028-09-01'),
+(5, 'Nebula Tech', 'Ethan Ford', '555-5555', '5 Epsilon Ct', 'Tech Systems', 'Active', 5, '2022-02-01', '2032-02-01'),
+(6, 'Zeta Enterprises', 'Fiona Garcia', '555-6666', '600 Stellar St', 'Parts', 'Inactive', 1, '2017-04-10', '2022-04-10'),
+(7, 'Lunar Logistics', 'James Wilson', '555-7777', '700 Orbit Ave', 'Logistics', 'Active', 4, '2020-05-05', '2030-05-05'),
+(8, 'Asteroid Industries', 'Isabella Lopez', '555-8888', '800 Comet Cir', 'Shield Systems', 'Active', 5, '2021-11-11', '2031-11-11'),
+(9, 'Iota Group', 'William Clark', '555-9999', '900 Eclipse Pkwy', 'Navigation', 'Active', 3, '2019-12-20', '2029-12-20'),
+(10, 'Solar Systems Inc.', 'Jade Adams', '555-1010', '1000 Rainbow Rd', 'Power Systems', 'Active', 5, '2023-01-01', '2033-01-01'),
+(11, 'Orion Shipyards', 'Karen Miles', '555-1113', '1100 Orion Dock Rd', 'Manufacturer', 'Active', 5, '2020-02-01', '2033-02-01'),
+(12, 'NovaStar Manufacturing', 'Leo Turner', '555-2224', '1200 NovaStar Way', 'Manufacturer', 'Active', 4, '2020-08-15', '2032-08-15'),
+(13, 'Pulsar Dynamics', 'Megan Hayes', '555-3335', '1300 Pulsar Blvd', 'Manufacturer', 'Active', 5, '2020-04-10', '2031-04-10'),
+(14, 'Stellar Forge Industries', 'Nathan Cruz', '555-4446', '1400 Stellar Forge Dr', 'Manufacturer', 'Active', 5, '2020-06-20', '2030-06-20'),
+(15, 'Cosmos Shipbuilders', 'Olivia Bennett', '555-5557', '1500 Cosmos Cir', 'Manufacturer', 'Active', 4, '2020-01-05', '2033-01-05');
+
+--Save preceding steps to disk
+COMMIT;
+
+--end of inserts.sql
